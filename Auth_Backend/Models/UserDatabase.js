@@ -1,7 +1,7 @@
 require("dotenv").config();
 console.log("connection",process.env.Connection)
 let mongoose=require("mongoose");
-mongoose.connect(`${process.env.Connection}/Tourism`)
+mongoose.connect(`${process.env.Connection}/tesig`)
 let Sch=new mongoose.Schema({
     Name:{
         type:String,
@@ -31,5 +31,5 @@ let Sch=new mongoose.Schema({
     }
 })
 
-let Model=mongoose.model("User",Sch)
+let Model=mongoose.model("Khang",Sch)
 module.exports=Model

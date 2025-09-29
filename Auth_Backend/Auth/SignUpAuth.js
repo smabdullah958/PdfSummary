@@ -13,7 +13,10 @@ let MySecretKey=process.env.SecretKey
         if(!Name||!Email||!Password){
             return res.status(401).json({message:"all fields must be filled"})
         }
-    let error=validationResult(req);
+if(!Role){
+    Role="User"
+}
+        let error=validationResult(req);
     if(!error.isEmpty()){
         return res.status(401).json({message:"validation error",error:error.array()})
     }
