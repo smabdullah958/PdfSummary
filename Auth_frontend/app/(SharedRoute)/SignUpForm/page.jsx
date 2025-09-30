@@ -7,7 +7,7 @@ import PostFormThunck from "@/Libraries/ReduxToolkit/AsyncThunck/SignUpThunck";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loader from "@/Components/Loader";
-
+import { resetSignUpState } from "@/Libraries/ReduxToolkit/Slices/PostFormSlice";
 
 const schema = yup.object({
   Name: yup.string().required("Full Name is required"),
@@ -40,7 +40,7 @@ let   SubmitForm =(UserData)=>{
 useEffect(()=>{
   if(success){
     setTimeout(() => {
-      
+      dispatch(resetSignUpState())
       router.push("/")
     }, 1000);
   }

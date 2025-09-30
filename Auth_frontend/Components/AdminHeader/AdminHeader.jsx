@@ -18,7 +18,7 @@ const AdminHeader= () => {
             className="text-white hover:text-yellow-300 transition-colors duration-300">
             Home
           </Link>
-          <Link   href="/Analytics"
+          <Link   href="AdminDashboard/Analytics"
             className="text-white hover:text-yellow-300 transition-colors duration-300">
             Analytics
           </Link>

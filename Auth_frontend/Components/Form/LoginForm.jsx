@@ -8,10 +8,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import LogInThunck from "@/Libraries/ReduxToolkit/AsyncThunck/LogInThunck";
 import ForgetPasswordPopUp from "@/Components/ForgetPasswordPopUp";
-import CheckLogIn from '@/Libraries/ReduxToolkit/AsyncThunck/CheckLoginThunck'
+import { useRouter } from "next/navigation";
 const LoginForm = () => {
+  let route=useRouter()
   //LogInSlice is come from a store bro 
-  let {Loading,errorMessage,success}=useSelector((state)=>state.LogInSlice)
+  let {Loading,errorMessage,success,Role}=useSelector((state)=>state.LogInSlice)
   let dispatch=useDispatch()
   let [Form, SetForm] = useState({
     Email: "",
@@ -28,7 +29,7 @@ const LoginForm = () => {
   let CloseForm=()=>{
     setTimeout(() => {
       dispatch(HideLogIn())
-    }, 1000);
+    }, 300);
   }
   
   let HandleButton=()=>{
@@ -37,12 +38,11 @@ const LoginForm = () => {
 
   useEffect(()=>{
     if(success){
-      setTimeout(() => {
           dispatch(HideLogIn())
-            dispatch(CheckLogIn());   // ✅ refetch role after login
           dispatch(resetLoginState())
-         
-      }, 1000);
+         if(Role==="Admin"){
+          route.push("/AdminDashboard")
+         }
     }
   },[success,dispatch])
   

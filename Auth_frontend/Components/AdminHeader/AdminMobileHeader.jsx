@@ -50,7 +50,7 @@ const AdminMobileHeader = () => {
               Home
             </Link>
             <Link
-              href="/"
+              href="AdminDashboard/Analytics"
               className="text-white hover:text-yellow-300 transition-colors duration-300"
               onClick={closeMenu}
             >

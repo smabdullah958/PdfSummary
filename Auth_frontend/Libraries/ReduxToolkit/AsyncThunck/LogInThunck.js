@@ -11,7 +11,7 @@ let LogInThunck=createAsyncThunk(
                 {withCredentials:true})
             console.log(response.data)
 
-                 dispatch(DisplayLogOut())
+              //   dispatch(DisplayLogOut())
             return response?.data
         }
         catch(error){
