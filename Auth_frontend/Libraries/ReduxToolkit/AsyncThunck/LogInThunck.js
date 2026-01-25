@@ -1,23 +1,25 @@
-"use client"
+"use client";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-let URL=process.env.NEXT_PUBLIC_BackendURL
-import { DisplayLogOut } from "@/Libraries/ReduxToolkit/Slices/CheckLogInSlice";
-let LogInThunck=createAsyncThunk(
-    "loginthunck",
-    async(Form,{dispatch,rejectWithValue})=>{
-        try{
-            let response=await axios.post(`${URL}/AuthController/LogInAuth`,Form,
-                {withCredentials:true})
-            console.log(response.data)
+let URL = process.env.NEXT_PUBLIC_BackendURL;
+import CheckLogIn from "@/Libraries/ReduxToolkit/AsyncThunck/CheckLoginThunck";
 
-              //   dispatch(DisplayLogOut())
-            return response?.data
-        }
-        catch(error){
-            console.log("internal erorr bro ",error)
-            return rejectWithValue(error.response?.data?.message||"error")
-        }
+let LogInThunck = createAsyncThunk(
+  "loginthunck",
+  async (Form, { dispatch, rejectWithValue }) => {
+    try {
+      let response = await axios.post(`${URL}/AuthRoute/LogInAuth`, Form, {
+        withCredentials: true,
+      });
+      console.log(response.data);
+
+      await dispatch(CheckLogIn()).unwrap();
+
+      return response?.data;
+    } catch (error) {
+      console.log("internal erorr bro ", error);
+      return rejectWithValue(error.response?.data?.message || "error");
     }
-)
-export default LogInThunck
+  },
+);
+export default LogInThunck;

@@ -1,19 +1,24 @@
-"use client"
+"use client";
 
 import Loader from "@/Components/Loader";
 
-import { HideLogIn, resetLoginState } from "@/Libraries/ReduxToolkit/Slices/LogInSlice";
+import {
+  HideLogIn,
+  resetLoginState,
+} from "@/Libraries/ReduxToolkit/Slices/LogInSlice";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LogInThunck from "@/Libraries/ReduxToolkit/AsyncThunck/LogInThunck";
 import ForgetPasswordPopUp from "@/Components/ForgetPasswordPopUp";
 import { useRouter } from "next/navigation";
 const LoginForm = () => {
-  let route=useRouter()
-  //LogInSlice is come from a store bro 
-  let {Loading,errorMessage,success,Role}=useSelector((state)=>state.LogInSlice)
-  let dispatch=useDispatch()
+  let route = useRouter();
+  //LogInSlice is come from a store bro
+  let { Loading, errorMessage, success, Role } = useSelector(
+    (state) => state.LogInSlice,
+  );
+  let dispatch = useDispatch();
   let [Form, SetForm] = useState({
     Email: "",
     Password: "",
@@ -26,31 +31,30 @@ const LoginForm = () => {
     }));
   };
 
-  let CloseForm=()=>{
+  let CloseForm = () => {
     setTimeout(() => {
-      dispatch(HideLogIn())
-    }, 300);
-  }
-  
-  let HandleButton=()=>{
-    dispatch(LogInThunck(Form))
-  }
+      dispatch(HideLogIn());
+    }, 500);
+  };
 
-  useEffect(()=>{
-    if(success){
-          dispatch(HideLogIn())
-          dispatch(resetLoginState())
-         if(Role==="Admin"){
-          route.push("/AdminDashboard")
-         }
+  let HandleButton = () => {
+    dispatch(LogInThunck(Form));
+  };
+
+  useEffect(() => {
+    if (success) {
+      dispatch(HideLogIn());
+      dispatch(resetLoginState());
+      if (Role === "Admin") {
+        route.push("/AdminDashboard");
+      }
     }
-  },[success,dispatch])
-  
+  }, [success, dispatch]);
 
   return (
     <div className="bottom-52">
       {/* Card Container */}
-      <div  className="bg-blue-100 shadow-2xl rounded-2xl p-8 w-[90vw] sm:w-[350px] ">
+      <div className="bg-blue-100 shadow-2xl rounded-2xl p-8 w-[90vw] sm:w-[350px] ">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Login
         </h2>
@@ -64,9 +68,10 @@ const LoginForm = () => {
           onChange={HandleFields}
           name="Email"
           value={Form.Email}
-          className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400" required
+          className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
         />
-        <ForgetPasswordPopUp/>
+        <ForgetPasswordPopUp />
         {/* Password Input */}
         <input
           type="password"
@@ -79,23 +84,28 @@ const LoginForm = () => {
         />
 
         {/* Button */}
-        <button disabled={Loading} 
-        onClick={HandleButton}
-        className={`w-full py-3 bg-[#67a1db] text-white font-semibold rounded-xl hover:bg-[#65a9ec] transition duration-300 shadow-md ${Loading?"opacity-40":"opacity-100"}`}>
-          {Loading?<Loader/>:"Login"}
+        <button
+          disabled={Loading}
+          onClick={HandleButton}
+          className={`w-full py-3 bg-[#67a1db] text-white font-semibold rounded-xl hover:bg-[#65a9ec] transition duration-300 shadow-md ${Loading ? "opacity-40" : "opacity-100"}`}
+        >
+          {Loading ? <Loader /> : "Login"}
         </button>
 
         {/* Extra Links */}
         <div className="mt-4 text-center text-sm text-gray-500">
           <p>
             Don’t have an account?{" "}
-            <Link href="/SignUpForm" onClick={CloseForm} className="text-blue-600 hover:underline">
+            <Link
+              href="/SignUpForm"
+              onClick={CloseForm}
+              className="text-blue-600 hover:underline"
+            >
               Sign Up
             </Link>
           </p>
         </div>
       </div>
-
     </div>
   );
 };
