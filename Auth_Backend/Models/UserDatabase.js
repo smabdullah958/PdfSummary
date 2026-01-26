@@ -22,12 +22,6 @@ let Sch = new mongoose.Schema({
     required: true,
     min: 6,
   },
-  resetPasswordToken: {
-    type: String,
-  },
-  resetPasswordExpire: {
-    type: Date,
-  },
 });
 
 let Model = mongoose.model("Khang", Sch);

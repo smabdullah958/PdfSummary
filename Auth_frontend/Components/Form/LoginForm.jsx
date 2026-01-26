@@ -10,7 +10,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LogInThunck from "@/Libraries/ReduxToolkit/AsyncThunck/LogInThunck";
-import ForgetPasswordPopUp from "@/Components/ForgetPasswordPopUp";
 import { useRouter } from "next/navigation";
 const LoginForm = () => {
   let route = useRouter();
@@ -45,7 +44,7 @@ const LoginForm = () => {
     if (success) {
       dispatch(HideLogIn());
       dispatch(resetLoginState());
-      if (Role === "Admin"||Role === "User") {
+      if (Role === "Admin" || Role === "User") {
         route.push("/UserDashboard");
       }
     }
@@ -71,7 +70,6 @@ const LoginForm = () => {
           className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         />
-        <ForgetPasswordPopUp />
         {/* Password Input */}
         <input
           type="password"

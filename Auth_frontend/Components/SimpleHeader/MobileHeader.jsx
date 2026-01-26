@@ -16,11 +16,6 @@ const MobileHeader = () => {
     <header className="md:hidden bg-[#92c7f2] shadow-lg ">
       {/* Top bar with logo + burger */}
       <div className=" px-6 flex items-center justify-between h-16">
-        {/* Logo */}
-        <p className="text-xl  font-bold text-white tracking-wide hover:scale-105 transition-transform">
-          🌍 TouristApp
-        </p>
-
         {/* Burger button */}
         {showMenu ? (
           //CROSS ICON
