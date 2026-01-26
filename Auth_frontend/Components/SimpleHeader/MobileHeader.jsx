@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import LogIn from "../Buttons/LogIn";
+import LogOut from "../Buttons/LogOut";
 
 const MobileHeader = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -33,6 +35,10 @@ const MobileHeader = () => {
             <Image src="/burger.webp" alt="menu" width={30} height={30} />
           </button>
         )}
+        <div>
+          <LogOut />
+          <LogIn />
+        </div>
       </div>
 
       {/* Slide-down menu */}
