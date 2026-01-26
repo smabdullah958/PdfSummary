@@ -1,7 +1,6 @@
 require("dotenv").config();
 console.log("Port No", process.env.Port, process.env.FrontendURL);
 let PortNo = process.env.Port;
-
 let URL = process.env.FrontendURL;
 const cookieParser = require("cookie-parser");
 let express = require("express");
@@ -15,6 +14,11 @@ App.use(
   }),
 );
 App.use(express.json());
+
+//create database connecton
+let mongoose = require("mongoose");
+mongoose.connect(`${process.env.Connection}/tesig`);
+
 let AuthController = require("./Routes/AuthRoute");
 App.use("/AuthRoute", AuthController);
 

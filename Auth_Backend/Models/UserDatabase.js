@@ -1,7 +1,6 @@
 require("dotenv").config();
 console.log("connection", process.env.Connection);
 let mongoose = require("mongoose");
-mongoose.connect(`${process.env.Connection}/tesig`);
 let Sch = new mongoose.Schema({
   Name: {
     type: String,
