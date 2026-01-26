@@ -9,7 +9,9 @@ const CheckLoginProvider = ({ children }) => {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
-  const { Role, IsLogIn, Loading } = useSelector(state => state.CheckLogInSlice);
+  const { Role, IsLogIn, Loading } = useSelector(
+    (state) => state.CheckLogInSlice,
+  );
 
   useEffect(() => {
     dispatch(CheckLogIn());
@@ -19,15 +21,15 @@ const CheckLoginProvider = ({ children }) => {
     if (Loading) return;
     // ✅ Only redirect from "/" (landing page)
     if (pathname === "/") {
-      if (IsLogIn && Role === "User" ||Role === "Admin") {
+      if (IsLogIn && (Role === "User" || Role === "Admin")) {
         router.replace("/UserDashboard");
-      } else {
+      } else if (IsLogIn && (Role !== "Admin" || Role !== "User")) {
         router.replace("/"); // or your user home
       }
     }
   }, [IsLogIn, Role, Loading, pathname, router]);
 
-  if(Loading)return <Loader/>
+  if (Loading) return <Loader />;
 
   return <>{children}</>;
 };

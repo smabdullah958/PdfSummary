@@ -23,7 +23,7 @@ const CheckAdminLoginChecker = ({ children }) => {
   useEffect(() => {
     if (!mounted || Loading) return;
 
-    if (!IsLogIn) {
+    if (!IsLogIn && (Role !== "Admin" || Role !== "User")) {
       router.replace("/"); // or router.push("/")
     }
   }, [mounted, Loading, IsLogIn, Role, router]);
