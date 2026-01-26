@@ -19,9 +19,9 @@ const CheckLoginProvider = ({ children }) => {
     if (Loading) return;
     // ✅ Only redirect from "/" (landing page)
     if (pathname === "/") {
-      if (IsLogIn && Role === "Admin") {
-        router.replace("/AdminDashboard");
-      } else if (IsLogIn && Role !== "Admin") {
+      if (IsLogIn && Role === "User" ||Role === "Admin") {
+        router.replace("/UserDashboard");
+      } else {
         router.replace("/"); // or your user home
       }
     }

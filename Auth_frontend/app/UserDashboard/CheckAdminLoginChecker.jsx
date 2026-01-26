@@ -1,16 +1,16 @@
-
-
 "use client";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CheckLogIn from "@/Libraries/ReduxToolkit/AsyncThunck/CheckLoginThunck";
 import { useRouter } from "next/navigation";
-import Loader from "@/app/loading"
+import Loader from "@/app/loading";
 
 const CheckAdminLoginChecker = ({ children }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { Role, IsLogIn, Loading } = useSelector((state) => state.CheckLogInSlice);
+  const { Role, IsLogIn, Loading } = useSelector(
+    (state) => state.CheckLogInSlice,
+  );
 
   const [mounted, setMounted] = useState(false);
 
@@ -23,21 +23,21 @@ const CheckAdminLoginChecker = ({ children }) => {
   useEffect(() => {
     if (!mounted || Loading) return;
 
-    if (!IsLogIn || Role !== "Admin") {
+    if (!IsLogIn) {
       router.replace("/"); // or router.push("/")
     }
   }, [mounted, Loading, IsLogIn, Role, router]);
 
   if (!mounted || Loading) {
-    return <Loader/>
+    return <Loader />;
   }
 
-  if (IsLogIn && Role === "Admin") {
+  if ((IsLogIn && Role === "Admin") || Role === "User") {
     return <>{children}</>;
   }
 
   // fallback while redirecting
-  return <Loader/>;
+  return <Loader />;
 };
 
 export default CheckAdminLoginChecker;

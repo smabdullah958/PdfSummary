@@ -1,17 +1,16 @@
-
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const MobileHeader = () => {
+const AdminMobileHeader = () => {
   const [showMenu, setShowMenu] = useState(false);
 
-  let closeMenu=()=>{
+  let closeMenu = () => {
     setTimeout(() => {
-        setShowMenu(false)
+      setShowMenu(false);
     }, 1000);
-  }
+  };
 
   return (
     <header className="md:hidden bg-[#92c7f2] shadow-lg ">
@@ -23,23 +22,26 @@ const MobileHeader = () => {
         </p>
 
         {/* Burger button */}
-        {showMenu?
-        //CROSS ICON
-            <span className="mr-5">
-            <button onClick={()=>setShowMenu(false)}>
+        {showMenu ? (
+          //CROSS ICON
+          <span className="mr-5">
+            <button onClick={() => setShowMenu(false)}>
               <span className="absolute w-6 h-[2px] bg-white rotate-45 "></span>
               <span className="absolute w-6 h-[2px] bg-white -rotate-45"></span>
-              </button>
-            </span>:<button
-          onClick={() => setShowMenu(true)}
-          className="focus:outline-none"
-        >
-          <Image src="/burger.webp" alt="menu" width={30} height={30} />
-        </button>}
+            </button>
+          </span>
+        ) : (
+          <button
+            onClick={() => setShowMenu(true)}
+            className="focus:outline-none"
+          >
+            <Image src="/burger.webp" alt="menu" width={30} height={30} />
+          </button>
+        )}
       </div>
 
       {/* Slide-down menu */}
-      {showMenu &&(
+      {showMenu && (
         <div className="absolute top-16 left-0 w-full bg-[#92c7f2] shadow-md z-50 animate-slideDown">
           <nav className="flex flex-col gap-4 p-6 text-lg font-medium">
             <Link
@@ -50,11 +52,11 @@ const MobileHeader = () => {
               Home
             </Link>
             <Link
-              href="/About"
+              href="UserDashboard/Analytics"
               className="text-white hover:text-yellow-300 transition-colors duration-300"
               onClick={closeMenu}
             >
-              About
+              Analytics
             </Link>
             <Link
               href="/Destination"
@@ -71,11 +73,10 @@ const MobileHeader = () => {
               Packages
             </Link>
           </nav>
-    
         </div>
       )}
     </header>
   );
 };
 
-export default MobileHeader;
+export default AdminMobileHeader;

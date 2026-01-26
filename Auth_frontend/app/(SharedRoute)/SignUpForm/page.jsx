@@ -19,11 +19,13 @@ const schema = yup.object({
 });
 
 export default function SignUpPage() {
-  let dispatch=useDispatch()
- let router=useRouter()
+  let dispatch = useDispatch();
+  let router = useRouter();
 
-  //PostFormSlice is come foram a store bro 
-  let {Loading,success,errorMessage}=useSelector((state)=>state.PostFormSlice)
+  //PostFormSlice is come foram a store bro
+  let { Loading, success, errorMessage } = useSelector(
+    (state) => state.PostFormSlice,
+  );
   const {
     register,
     handleSubmit,
@@ -31,31 +33,33 @@ export default function SignUpPage() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-        //UserData is pass to a thunck
-let   SubmitForm =(UserData)=>{
-  console.log(UserData)
-   dispatch(PostFormThunck(UserData))
-}
+  //UserData is pass to a thunck
+  let SubmitForm = (UserData) => {
+    console.log(UserData);
+    dispatch(PostFormThunck(UserData));
+  };
 
-useEffect(()=>{
-  if(success){
-    setTimeout(() => {
-      dispatch(resetSignUpState())
-      router.push("/")
-    }, 1000);
-  }
-},[success,router])
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        dispatch(resetSignUpState());
+        router.push("/");
+      }, 1000);
+    }
+  }, [success, router]);
 
   return (
-    <div className=" h-screen flex items-center justify-center bg-gradient-to-r from-indigo-200
-     via-purple-200 to-pink-200 sm:overflow-y-hidden">
+    <div
+      className=" h-screen flex items-center justify-center bg-gradient-to-r from-indigo-200
+     via-purple-200 to-pink-200 sm:overflow-y-hidden"
+    >
       <div className="w-full max-w-md p-8 bg-white shadow-2xl rounded-2xl">
         <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">
           Create an Account
         </h2>
 
-        <div  className="space-y-5">
-        <span className="text-red-300 ">{errorMessage}</span>
+        <div className="space-y-5">
+          <span className="text-red-300 ">{errorMessage}</span>
           {/* Full Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -89,9 +93,9 @@ useEffect(()=>{
             <label className="block text-sm font-medium text-gray-700">
               Password
             </label>
-            <input type="password"
+            <input
+              type="password"
               {...register("Password")}
-              
               placeholder="••••••••"
               className="w-full px-4 py-2 mt-1 border rounded-xl focus:ring-2 focus:ring-indigo-400 focus:outline-none"
             />
@@ -104,8 +108,9 @@ useEffect(()=>{
           <button
             onClick={handleSubmit(SubmitForm)}
             className={`w-full py-2 text-white font-semibold bg-indigo-600 rounded-xl shadow-md
-             hover:bg-indigo-700 transition duration-200 ${Loading?"opacity-50":"opacity-100"}`} >
-            {Loading?<Loader/>:"Sign Up"}
+             hover:bg-indigo-700 transition duration-200 ${Loading ? "opacity-50" : "opacity-100"}`}
+          >
+            {Loading ? <Loader /> : "Sign Up"}
           </button>
         </div>
       </div>

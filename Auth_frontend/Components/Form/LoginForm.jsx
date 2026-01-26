@@ -45,8 +45,8 @@ const LoginForm = () => {
     if (success) {
       dispatch(HideLogIn());
       dispatch(resetLoginState());
-      if (Role === "Admin") {
-        route.push("/AdminDashboard");
+      if (Role === "Admin"||Role === "User") {
+        route.push("/UserDashboard");
       }
     }
   }, [success, dispatch]);

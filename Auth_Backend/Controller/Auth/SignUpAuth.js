@@ -8,8 +8,7 @@ let JWT = require("jsonwebtoken");
 let SignUpAuth = async (req, res) => {
   try {
     let MySecretKey = process.env.SecretKey;
-
-    let { Name, Email, Password, Role } = req.body;
+    let { Name, Email, Password } = req.body;
     if (!Name || !Email || !Password) {
       return res.status(401).json({ message: "all fields must be filled" });
     }
