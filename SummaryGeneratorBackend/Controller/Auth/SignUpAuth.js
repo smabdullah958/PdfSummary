@@ -9,6 +9,7 @@ let SignUpAuth = async (req, res) => {
   try {
     let MySecretKey = process.env.SecretKey;
     let { Name, Email, Password } = req.body;
+    let Role = "User";
     if (!Name || !Email || !Password) {
       return res.status(401).json({ message: "all fields must be filled" });
     }

@@ -14,7 +14,7 @@ let Sch = new mongoose.Schema({
   Role: {
     type: String,
     required: true,
-    enum: ["User", "Admin"],
+    enum: ["User", "Admin", ""],
     default: "",
   },
   Password: {
