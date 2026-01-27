@@ -21,16 +21,10 @@ const Header = () => {
             About
           </Link>
           <Link
-            href="/Destination"
+            href="/Feature"
             className="text-white hover:text-yellow-300 transition-colors duration-300"
           >
-            Destination
-          </Link>
-          <Link
-            href="/Packages"
-            className="text-white hover:text-yellow-300 transition-colors duration-300"
-          >
-            Packages
+            Features
           </Link>
         </nav>
 

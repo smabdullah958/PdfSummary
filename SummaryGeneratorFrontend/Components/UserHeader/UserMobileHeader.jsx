@@ -46,32 +46,18 @@ const AdminMobileHeader = () => {
         <div className="absolute top-16 left-0 w-full bg-[#92c7f2] shadow-md z-50 animate-slideDown">
           <nav className="flex flex-col gap-4 p-6 text-lg font-medium">
             <Link
-              href="/"
-              className="text-white hover:text-yellow-300 transition-colors duration-300"
               onClick={closeMenu}
+              href="/UserDashboard"
+              className="text-white hover:bg-white/20 rounded-lg px-4 py-2 transition"
             >
-              Home
+              📄 Documents
             </Link>
             <Link
-              href="UserDashboard/Analytics"
-              className="text-white hover:text-yellow-300 transition-colors duration-300"
               onClick={closeMenu}
+              href="/UserDashboard/AskQuestions"
+              className="text-white hover:bg-white/20 rounded-lg px-4 py-2 transition"
             >
-              Analytics
-            </Link>
-            <Link
-              href="/Destination"
-              className="text-white hover:text-yellow-300 transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Destination
-            </Link>
-            <Link
-              href="/Packages"
-              className="text-white hover:text-yellow-300 transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Packages
+              Ask Questions
             </Link>
           </nav>
         </div>

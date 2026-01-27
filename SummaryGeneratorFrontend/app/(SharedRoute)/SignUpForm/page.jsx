@@ -43,7 +43,7 @@ export default function SignUpPage() {
     if (success) {
       setTimeout(() => {
         dispatch(resetSignUpState());
-        router.push("/");
+        router.push("/UserDashboard");
       }, 1000);
     }
   }, [success, router]);

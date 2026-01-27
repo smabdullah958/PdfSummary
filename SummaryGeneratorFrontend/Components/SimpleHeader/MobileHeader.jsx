@@ -60,18 +60,11 @@ const MobileHeader = () => {
               About
             </Link>
             <Link
-              href="/Destination"
+              href="/Feature"
               className="text-white hover:text-yellow-300 transition-colors duration-300"
               onClick={closeMenu}
             >
-              Destination
-            </Link>
-            <Link
-              href="/Packages"
-              className="text-white hover:text-yellow-300 transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Packages
+              Feature
             </Link>
           </nav>
         </div>

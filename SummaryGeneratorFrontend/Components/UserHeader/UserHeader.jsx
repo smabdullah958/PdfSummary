@@ -2,45 +2,39 @@ import React from "react";
 import Link from "next/link";
 import LogIn from "../Buttons/LogIn";
 import LogOut from "../Buttons/LogOut";
-const AdminHeader = () => {
-  return (
-    <header className=" sticky top-0 z-50">
-      <div className=" hidden md:flex justify-between items-center md:h-16 bg-[#92c7f2] shadow-lg  mx-auto px-3 lg:px-6  h-16 2xl:h-24 ">
-        {/* Navigation Links */}
-        <nav className="flex gap-6 text-lg 2xl:text-4xl font-medium">
-          <Link
-            href="/"
-            className="text-white hover:text-yellow-300 transition-colors duration-300"
-          >
-            Home
-          </Link>
-          <Link
-            href="UserDashboard/Analytics"
-            className="text-white hover:text-yellow-300 transition-colors duration-300"
-          >
-            Analytics
-          </Link>
-          <Link
-            href="/Destination"
-            className="text-white hover:text-yellow-300 transition-colors duration-300"
-          >
-            Destination
-          </Link>
-          <Link
-            href="/Packages"
-            className="text-white hover:text-yellow-300 transition-colors duration-300"
-          >
-            Packages
-          </Link>
-        </nav>
 
-        <div className="flex gap-2">
-          <LogOut />
-          <LogIn />
-        </div>
+const AdminSidebar = () => {
+  return (
+    <aside className="hidden  fixed left-0 top-0 h-screen w-64 bg-[#92c7f2] shadow-xl md:flex flex-col justify-between z-70">
+      {/* ===== Logo / Title ===== */}
+      <div className="px-6 py-6">
+        <h1 className="text-2xl font-bold text-white">PDF Summary</h1>
       </div>
-    </header>
+
+      {/* ===== Navigation ===== */}
+      <nav className="flex flex-col gap-4 px-6 text-lg font-medium">
+        <Link
+          href="/UserDashboard"
+          className="text-white hover:bg-white/20 rounded-lg px-4 py-2 transition"
+        >
+          📄 Documents
+        </Link>
+
+        <Link
+          href="/UserDashboard/AskQuestions"
+          className="text-white hover:bg-white/20 rounded-lg px-4 py-2 transition"
+        >
+          Ask Questions
+        </Link>
+      </nav>
+
+      {/* ===== Auth Buttons ===== */}
+      <div className="px-6 py-6 flex flex-col gap-2">
+        <LogIn />
+        <LogOut />
+      </div>
+    </aside>
   );
 };
 
-export default AdminHeader;
+export default AdminSidebar;

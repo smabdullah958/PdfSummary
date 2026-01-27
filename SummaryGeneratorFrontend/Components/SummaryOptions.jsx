@@ -1,0 +1,74 @@
+"use client";
+
+import { useState } from "react";
+
+const SummaryOptions = ({ PdfFile }) => {
+  //for other opton
+  let [options, SetOptions] = useState({
+    Language: "English",
+    Format: "Paragraph",
+    Length: "Short",
+  });
+
+  //handle dropdown
+  let HandleDropDown = (values) => {
+    SetOptions((previous) => ({
+      ...previous,
+      [values.target.name]: values.target.value,
+    }));
+  };
+
+  let handleForm = () => {
+    console.log(e);
+  };
+
+  return (
+    <div
+      className="mt-10 2xl:mt-20 w-72 sm:w-96 xl:w-[40vw] 2xl:w-[30vw] bg-gray-100 p-10 
+   rounded-3xl text-black opacity-100 border-2 border-gray-300 border-dotted px-20"
+    >
+      <h1 className="font-bold text-xl mb-5">Summary options </h1>
+      Language{" "}
+      <select
+        onChange={HandleDropDown}
+        value={options.Language}
+        name="Language"
+        className="border-2 border-solid broder-black mb-5 mt-2 p-3 rounded-xl bg-gray-100 w-full "
+      >
+        <option value="English">English</option>
+        <option value="Urdu">Urdu</option>
+        <option value="Hindi">Hindi</option>
+        <option value="Balochi">Balochi</option>
+        <option value="Pashto">Pashto</option>
+      </select>
+      Format{" "}
+      <select
+        onChange={HandleDropDown}
+        value={options.Format}
+        name="Format"
+        className="border-2 border-solid broder-black mt-2 mb-5 p-3 rounded-xl bg-gray-100 w-full "
+      >
+        <option value="Paragraph">Paragraph</option>
+        <option value="Bullet Points">Bullet Points</option>
+      </select>
+      Length{" "}
+      <select
+        onChange={HandleDropDown}
+        value={options.Length}
+        name="Length"
+        className="border-2 border-solid broder-black mt-2 p-3 rounded-xl bg-gray-100 w-full "
+      >
+        <option value="Short">Short</option>
+        <option value="Detail">Detail</option>
+      </select>
+      <button
+        onClick={handleForm}
+        className=" mt-10 p-4 rounded-xl   w-full font-bold bg-blue-400"
+      >
+        Generate Summary
+      </button>
+    </div>
+  );
+};
+
+export default SummaryOptions;

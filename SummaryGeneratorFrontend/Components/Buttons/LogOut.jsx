@@ -8,7 +8,7 @@ import { resetLogOut } from "@/Libraries/ReduxToolkit/Slices/LogOutSlice";
 const LogOut = () => {
   let dispatch = useDispatch();
   //IsLogIn is a state in a CheckLogInSlice whichs is used to check the user is login or not if a checklogin is true than it will show logout button while hide the login button and if a checklogin is false than it will shwo the login button while hide the logout button bro
-  let { IsLogIn, Role } = useSelector((state) => state.CheckLogInSlice);
+  let { IsLogIn } = useSelector((state) => state.CheckLogInSlice);
   let { Loading, success } = useSelector((state) => state.LogOutSlice);
   let HandleButton = () => {
     setTimeout(() => {
