@@ -2,8 +2,8 @@ let { GoogleGenAI } = require("@google/genai");
 
 let apiKeys = [
   process.env.PDFChat1,
-  process.env.Gemini_API_2,
-  process.env.Gemini_API_3,
+  process.env.PDFChat2,
+  process.env.PDFChat3,
 ].filter(Boolean);
 
 let LLMClient = async ({ text, language, format, length }) => {

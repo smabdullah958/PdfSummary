@@ -1,4 +1,4 @@
-let PDFTextExtractor = require("../Utils/TextExtractor");
+let PDFTextExtractor = require("../Utils/TextExtractor.js");
 let LLMClient = require("../Utils/LLMClient");
 let { validationResult } = require("express-validator");
 
