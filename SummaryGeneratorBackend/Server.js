@@ -19,7 +19,13 @@ App.use(express.json());
 let mongoose = require("mongoose");
 mongoose.connect(`${process.env.Connection}/tesig`);
 
+//for file upload
+let upload = require("./Config/multerConfig");
+
 let AuthController = require("./Routes/AuthRoute");
+let SummaryRoute = require("./Routes/SummaryRoutes");
+
 App.use("/AuthRoute", AuthController);
+App.use("/SummaryRoute", upload.single("pdf"), SummaryRoute);
 
 App.listen(PortNo);
