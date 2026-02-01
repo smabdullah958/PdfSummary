@@ -1,14 +1,19 @@
 "use client";
-
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-
+import SummaryThunck from "@/Libraries/ReduxToolkit/AsyncThunck/SummaryThunck";
+import Loader from "@/Components/ButtonLoader";
 const SummaryOptions = ({ PdfFile }) => {
+  let dispatch = useDispatch();
   //for other opton
   let [options, SetOptions] = useState({
     Language: "English",
     Format: "Paragraph",
     Length: "Short",
   });
+
+  //PDFSlice is come foram a store bro
+  let { Loading, errorMessage } = useSelector((state) => state.PDFSlice);
 
   //handle dropdown
   let HandleDropDown = (values) => {
@@ -18,15 +23,27 @@ const SummaryOptions = ({ PdfFile }) => {
     }));
   };
 
-  let handleForm = () => {
-    console.log(e);
+  let handleForm = (data) => {
+    data.preventDefault();
+    console.log(data);
+    const formdata = new FormData();
+
+    formdata.append("pdf", PdfFile); // Matches your middleware body('pdf')
+    formdata.append("Language", options.Language);
+    formdata.append("Format", options.Format);
+    formdata.append("Length", options.Length);
+    // 3. Dispatch the Thunk
+    dispatch(SummaryThunck(formdata));
   };
 
   return (
     <div
-      className="mt-10 2xl:mt-20 w-72 sm:w-96 xl:w-[40vw] 2xl:w-[30vw] bg-gray-100 p-10 
-   rounded-3xl text-black opacity-100 border-2 border-gray-300 border-dotted px-20"
+      className="mt-10 2xl:mt-20 w-72 sm:w-96 xl:w-[40vw] 2xl:w-[30vw] bg-gray-100 py-10  md:p-10  
+   rounded-3xl text-black opacity-100 border-2 border-gray-300 border-dotted px-10"
     >
+      {errorMessage && (
+        <p className="text-center text-red-400">{errorMessage}</p>
+      )}
       <h1 className="font-bold text-xl mb-5">Summary options </h1>
       Language{" "}
       <select
@@ -63,9 +80,11 @@ const SummaryOptions = ({ PdfFile }) => {
       </select>
       <button
         onClick={handleForm}
-        className=" mt-10 p-4 rounded-xl   w-full font-bold bg-blue-400"
+        className={` mt-10 p-4 rounded-xl   w-full font-bold 
+        ${Loading ? "opacity-30 bg-linear-to-r  from-blue-400 to-purple-400" : "opacity-100 bg-linear-to-r  from-blue-500 to-purple-500 hover:cursor-pointer  duration-300 transition"}
+        `}
       >
-        Generate Summary
+        {Loading ? <Loader /> : "Generate Summary"}
       </button>
     </div>
   );

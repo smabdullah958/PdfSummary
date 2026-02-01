@@ -11,21 +11,22 @@ let SummaryController = async (req, res) => {
     //validation
     let error = validationResult(req);
     if (!error.isEmpty()) {
-      return res.status(401).json({ Error: error.array() });
+      return res.status(401).json({ errorMessage: error.array() });
     }
 
     if (!req.file) {
-      return res.status(400).json({ Error: "PDF file is required" });
+      return res.status(400).json({ errorMessage: "PDF file is required" });
     }
 
     if (req.file.size > 5 * 1024 * 1024) {
-      return res.status(400).json({ Error: "PDF is exceeds than 5MB" });
+      console.log("File Size received:", req.file.size); // Debugging line
+      return res.status(400).json({ errorMessage: "PDF is exceeds than 5MB" });
     }
 
     // pdf text extractor
     let result = await PDFTextExtractor(req.file.buffer);
     if (!result.text) {
-      return res.status(400).json({ error: "empty pdf" });
+      return res.status(400).json({ errorMessage: "empty pdf" });
     }
     let Summary = await LLMClient({
       text: result.text,
@@ -36,15 +37,15 @@ let SummaryController = async (req, res) => {
 
     console.log("the file daa is ", result.text);
     console.log("the summary of a file isa ", Summary);
-    res.status(200).json({ Message: "Data received successfully", Summary });
+    res.status(200).json({ Summary: Summary });
   } catch (err) {
     console.log("internal eror", err);
     if (err?.status === 429) {
-      return res
-        .status(429)
-        .json({ error: "AI has high load. Please try  again after 24 hour" });
+      return res.status(429).json({
+        errorMessage: "AI has high load. Please try  again after 24 hour",
+      });
     }
-    res.status(500).json({ Error: "Please try  again after some time" });
+    res.status(500).json({ errorMessage: "Please try  again after some time" });
   }
 };
 

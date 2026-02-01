@@ -4,6 +4,7 @@ let apiKeys = [
   process.env.PDFChat1,
   process.env.PDFChat2,
   process.env.PDFChat3,
+  process.env.PDFChat4,
 ].filter(Boolean);
 
 let LLMClient = async ({ text, language, format, length }) => {
@@ -58,7 +59,6 @@ You MUST follow instructions exactly.
 You are NOT allowed to translate unless explicitly told.
 `;
 
-  let lastError;
 
   for (let key of apiKeys) {
     try {

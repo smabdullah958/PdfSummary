@@ -1,7 +1,12 @@
 "use client";
 import { useState } from "react";
 import SummaryOptions from "./SummaryOptions";
+import { useSelector } from "react-redux";
+import PDFLoader from "./PDFLoader";
+import DisplaySummary from "./DisplaySummary";
 const UploadPDF = () => {
+  let { Loading, success } = useSelector((state) => state.PDFSlice);
+
   let [PdfFile, SetPdfFile] = useState(null);
   //show other options
   let [ShowOptions, SetShowOptions] = useState(false);
@@ -51,7 +56,10 @@ const UploadPDF = () => {
           )}
         </div>
       </div>
-      {ShowOptions && <SummaryOptions PdfFile={PdfFile} />}
+      {ShowOptions && PdfFile && <SummaryOptions PdfFile={PdfFile} />}
+      {/* //sho loader */}
+      {Loading && <PDFLoader />}
+      {success && PdfFile && <DisplaySummary />}
     </div>
   );
 };
