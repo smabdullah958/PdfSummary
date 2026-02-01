@@ -5,6 +5,7 @@ let apiKeys = [
   process.env.PDFChat2,
   process.env.PDFChat3,
   process.env.PDFChat4,
+  process.env.PDFChat5,
 ].filter(Boolean);
 
 let LLMClient = async ({ text, language, format, length }) => {
@@ -59,7 +60,6 @@ You MUST follow instructions exactly.
 You are NOT allowed to translate unless explicitly told.
 `;
 
-
   for (let key of apiKeys) {
     try {
       const ai = new GoogleGenAI({ apiKey: key });
@@ -70,14 +70,12 @@ You are NOT allowed to translate unless explicitly told.
           systemInstruction: systemPrompt,
         },
       });
-      let summary = "no summary generated";
+      let summary;
       if (
         response?.candidates?.length > 0 &&
         response.candidates[0]?.content?.parts?.length > 0
       ) {
-        summary =
-          response.candidates?.[0]?.content?.parts[0]?.text ||
-          "Please try  again after some time";
+        summary = response.candidates?.[0]?.content?.parts[0]?.text;
       }
       console.log(summary);
       return summary;
@@ -87,7 +85,9 @@ You are NOT allowed to translate unless explicitly told.
       continue; // try the next key
     }
   }
-  return "Please try  again after some time";
+  const error = new Error("All AI keys are exhausted or invalid");
+  error.status = lastError?.status || 500;
+  throw error;
 };
 
 module.exports = LLMClient;

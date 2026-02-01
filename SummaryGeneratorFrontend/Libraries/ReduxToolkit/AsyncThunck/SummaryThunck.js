@@ -14,7 +14,7 @@ let SummaryThunck = createAsyncThunk(
     } catch (error) {
       console.log("internal error bro");
       return rejectWithValue(
-        error.response?.data?.message || "Try Again after 24 hours",
+        error.response?.data?.errorMessage || "Try Again after 24 hours",
       );
     }
   },

@@ -28,6 +28,7 @@ let SummaryController = async (req, res) => {
     if (!result.text) {
       return res.status(400).json({ errorMessage: "empty pdf" });
     }
+
     let Summary = await LLMClient({
       text: result.text,
       language: Language,
@@ -40,12 +41,22 @@ let SummaryController = async (req, res) => {
     res.status(200).json({ Summary: Summary });
   } catch (err) {
     console.log("internal eror", err);
+    //if APi is a free tier is completed than show issue
     if (err?.status === 429) {
       return res.status(429).json({
         errorMessage: "AI has high load. Please try  again after 24 hour",
       });
     }
-    res.status(500).json({ errorMessage: "Please try  again after some time" });
+
+    if (err?.status === 410) {
+      return res.status(400).json({
+        errorMessage: err.message,
+      });
+    }
+
+    res
+      .status(500)
+      .json({ errorMessage: "Please try  again after  some time" });
   }
 };
 

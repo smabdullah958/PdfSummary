@@ -13,7 +13,7 @@ const SummaryOptions = ({ PdfFile }) => {
   });
 
   //PDFSlice is come foram a store bro
-  let { Loading, errorMessage } = useSelector((state) => state.PDFSlice);
+  let { Loading } = useSelector((state) => state.PDFSlice);
 
   //handle dropdown
   let HandleDropDown = (values) => {
@@ -39,11 +39,8 @@ const SummaryOptions = ({ PdfFile }) => {
   return (
     <div
       className="mt-10 2xl:mt-20 w-72 sm:w-96 xl:w-[40vw] 2xl:w-[30vw] bg-gray-100 py-10  md:p-10  
-   rounded-3xl text-black opacity-100 border-2 border-gray-300 border-dotted px-10"
+   rounded-3xl text-black opacity-100 border-2 border-gray-300 border-dotted px-10 mb-10"
     >
-      {errorMessage && (
-        <p className="text-center text-red-400">{errorMessage}</p>
-      )}
       <h1 className="font-bold text-xl mb-5">Summary options </h1>
       Language{" "}
       <select

@@ -1,23 +1,32 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SummaryOptions from "./SummaryOptions";
 import { useSelector } from "react-redux";
 import PDFLoader from "./PDFLoader";
 import DisplaySummary from "./DisplaySummary";
+import toast from "react-hot-toast";
 const UploadPDF = () => {
-  let { Loading, success } = useSelector((state) => state.PDFSlice);
+  let { Loading, success, errorMessage } = useSelector(
+    (state) => state.PDFSlice,
+  );
 
   let [PdfFile, SetPdfFile] = useState(null);
   //show other options
   let [ShowOptions, SetShowOptions] = useState(false);
-  let HandlePdfFile = (e) => {
-    SetPdfFile(e.target.files[0]);
+  let HandlePdfFile = (field) => {
+    SetPdfFile(field.target.files[0]);
     SetShowOptions(true);
   };
   //find file size
   const FileSize = (bytes) => {
     return (bytes / (1024 * 1024)).toFixed(2) + " MB";
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+    }
+  }, [errorMessage]);
 
   return (
     <div className="flex flex-col justify-center items-center">

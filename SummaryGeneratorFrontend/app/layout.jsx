@@ -6,6 +6,9 @@ import StoreProvider from "@/app/StoreProvider";
 import "./globals.css";
 import CheckLoginProvider from "@/Components/CheckLoginProvider";
 import NavbarWrapper from "@/Components/NavbarWrapper";
+
+import { Toaster } from "react-hot-toast";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -16,6 +19,7 @@ export default function RootLayout({ children }) {
           <NavbarWrapper />{" "}
           {/*inside this the header and MobileHeader is present */}
           {children}
+          <Toaster position="top-right" reverseOrder={false} />
         </StoreProvider>
       </body>
     </html>
