@@ -1,5 +1,5 @@
-let PDFTextExtractor = require("../Utils/TextExtractor.js");
-let LLMClient = require("../Utils/LLMClient");
+let PDFTextExtractor = require("../../Utils/TextExtractor.js");
+let LLMClient = require("../../Utils/LLMClient.js");
 let { validationResult } = require("express-validator");
 
 let SummaryController = async (req, res) => {
@@ -36,7 +36,6 @@ let SummaryController = async (req, res) => {
       format: Format,
     });
 
-    console.log("the file daa is ", result.text);
     console.log("the summary of a file isa ", Summary);
     res.status(200).json({ Summary: Summary });
   } catch (err) {

@@ -6,6 +6,8 @@ let apiKeys = [
   process.env.PDFChat3,
   process.env.PDFChat4,
   process.env.PDFChat5,
+  process.env.PDFChat6,
+  process.env.PDFChat7
 ].filter(Boolean);
 
 let LLMClient = async ({ text, language, format, length }) => {
